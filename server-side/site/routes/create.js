@@ -10,7 +10,7 @@ var Server = mongo.Server,
  
 var MongoClient = mongo.MongoClient;
 var db = null;
-var client = redis.createClient(6379, '127.0.0.1', {});
+var client = redis.createClient(6379, '52.88.141.78', {});
 MongoClient.connect("mongodb://"+process.env.MONGO_USER+":"+process.env.MONGO_PASSWORD+"@"+process.env.MONGO_IP+":27017/site?authSource=admin", function(err, authdb) {
   // Now you can use the database in the db variable
   db = authdb;
