@@ -25,10 +25,18 @@ var emailServer  = emailjs.server.connect({
 });
 
 exports.createStudy = function(req, res) {
+  
+    
+	client.get('canCreate',function(err,reply){
 
+        if(reply==null || reply == 'no'){
+		 
+            res.send('Create feature is turnded off [REDIS]')
+	}
+        else{
     var invitecode = req.body.invitecode; 
     var studyKind = req.body.studyKind;
-
+    
     if( invitecode != "RESEARCH" )
     {
         res.send({'error':'Invalid invitecode'});
@@ -66,6 +74,8 @@ exports.createStudy = function(req, res) {
 
         });
     });
+   }
+  });
 };
 
 
