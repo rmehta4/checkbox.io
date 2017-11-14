@@ -2,7 +2,7 @@ var mongo = require('mongodb');
 var crypto = require('crypto');
 var emailjs = require('emailjs/email');
 var models = require('./studyModel.js');
-
+var redis = require('redis');
  
 var Server = mongo.Server,
     Db = mongo.Db,
@@ -10,6 +10,7 @@ var Server = mongo.Server,
  
 var MongoClient = mongo.MongoClient;
 var db = null;
+var client = redis.createClient(6379, '127.0.0.1', {});
 MongoClient.connect("mongodb://"+process.env.MONGO_USER+":"+process.env.MONGO_PASSWORD+"@"+process.env.MONGO_IP+":27017/site?authSource=admin", function(err, authdb) {
   // Now you can use the database in the db variable
   db = authdb;
@@ -29,7 +30,7 @@ exports.createStudy = function(req, res) {
     
 	client.get('canCreate',function(err,reply){
 
-        if(reply==null || reply == 'no'){
+        if(reply == null || reply == 'false'){
 		 
             res.send('Create feature is turnded off [REDIS]')
 	}
