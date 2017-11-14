@@ -29,8 +29,8 @@ exports.createStudy = function(req, res) {
   
     
 	client.get('canCreate',function(err,reply){
-
-        if(reply == null || reply == 'false'){
+        console.log("redisssssssssss " + reply);
+        if(reply == null || reply == '	false'){
 		 
             res.send('Create feature is turnded off [REDIS]')
 	}
